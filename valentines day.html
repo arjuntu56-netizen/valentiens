@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine 💘</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+
+      /* MAIN BACKGROUND */
+      background:#ffd6e7;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 0;
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: 0 12px 55px rgba(0,0,0,0.30);
+      width: min(540px, 92%);
+      backdrop-filter: blur(7px);
+    }
+
+    .gift-text {
+      font-size: 18px;
+      font-weight: bold;
+      color: #a3002f;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #c2185b;
+      margin-bottom: 20px;
+      line-height: 1.25;
+    }
+
+    .buttons {
+      position: relative;
+      height: 130px;
+      margin-top: 10px;
+    }
+
+    button {
+      padding: 14px 28px;
+      font-size: 18px;
+      border: black;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      position: absolute;
+      user-select: none;
+    }
+
+    #yesBtn {
+      left: 70px;
+      top: 40px;
+      background: #ff1744;
+      color: white;
+      font-weight: bold;
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.08);
+    }
+
+    #noBtn {
+      left: 270px;
+      top: 40px;
+      background: #444;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.55);
+      z-index: 999;
+      padding: 18px;
+    }
+
+    .popup-box {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      width: min(430px, 95%);
+      text-align: center;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.35);
+      animation: pop 0.25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d81b60;
+      margin-bottom: 12px;
+    }
+
+    .popup img {
+      width: 100%;
+      max-width: 270px;
+      border-radius: 14px;
+      margin: 12px 0;
+    }
+
+    .love-text {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff1744;
+      margin-top: 8px;
+    }
+
+    /* Surprise romantic photo */
+    .surprise-photo {
+      width: 100%;
+      max-width: 320px;
+      border-radius: 16px;
+      margin-top: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.22);
+    }
+
+    .surprise-caption {
+      margin-top: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #b0003a;
+    }
+
+    .closeBtn {
+      margin-top: 16px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: #ff1744;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Music button */
+    .musicBtn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      border: none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    @media (max-width: 480px) {
+      #yesBtn { left: 45px; }
+      #noBtn { left: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Sweet romantic royalty-free music -->
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_46f0d9b3c8.mp3?filename=romantic-ambient-piano-112191.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="musicBtn" id="musicBtn">🔊 Play Music</button>
+
+  <div class="card">
+    <div class="gift-text">🎁 Here the gift from your favourite 💝</div>
+    <h1>💘 Vyshna, will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 😤</button>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-box">
+      <div class="popup-title">Best decision ever 😍💍</div>
+
+      <img src="https://media4.giphy.com/media/v1.Y2lkPTZjMDliOTUyZzNqbXl1anQ3enIyMXk5OXdhZ2tsNzZmY3N6b3Uza3Y3d3AzcDN2YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/4Fk7TKPATquiKYa6qv/giphy.gif" alt="Happy Gif">
+
+      <div class="love-text">I LOVE YOU ❤️</div>
+
+      <!-- Surprise Photo -->
+      <img class="surprise-photo" src="second_romantic_image.jpg" alt="Romantic Surprise">
+
+      <div class="surprise-caption">Now you are officially my Valentine 💖🌹</div>
+
+      <button class="closeBtn" id="closeBtn">Okay 😘</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const popup = document.getElementById("popup");
+    const closeBtn = document.getElementById("closeBtn");
+
+    // Music
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let isPlaying = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (!isPlaying) {
+        bgMusic.play();
+        musicBtn.innerText = "🔇 Pause Music";
+        isPlaying = true;
+      } else {
+        bgMusic.pause();
+        musicBtn.innerText = "🔊 Play Music";
+        isPlaying = false;
+      }
+    });
+
+    // NO button jumping
+    function moveNoButton() {
+      const box = document.querySelector(".buttons").getBoundingClientRect();
+      const maxX = box.width - noBtn.offsetWidth;
+      const maxY = box.height - noBtn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("click", moveNoButton);
+
+    // YES click
+    yesBtn.addEventListener("click", () => {
+      popup.style.display = "flex";
+      yesBtn.innerText = "YES 😍💍";
+      noBtn.style.display = "none";
+    });
+
+    closeBtn.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
